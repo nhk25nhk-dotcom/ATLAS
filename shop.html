@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>المجموعة الكاملة — ATLAS</title>
+<meta name="description" content="تصفّحي كل قطع ATLAS المستوردة من الحقائب والمحافظ والإكسسوارات، مقسّمة حسب الصنف.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="preloader">
+    <div class="pl-word">ATLAS</div>
+    <div class="pl-bar"><span></span></div>
+    <div class="pl-pct">٠٪</div>
+  </div>
+  <div class="grain"></div>
+
+  <nav class="site-nav">
+    <a href="index.html" class="nav-logo">أطلس <b>ATLAS</b></a>
+    <div class="nav-links">
+      <a href="shop.html">المجموعة</a>
+      <a href="index.html#craft">لماذا أطلس</a>
+      <a href="cart.html">السلة</a>
+      <a href="admin.html">لوحة التحكم</a>
+    </div>
+    <div class="nav-actions">
+      <a href="cart.html" class="icon-btn cursor-hover" aria-label="السلة">
+        <svg viewBox="0 0 24 24"><path d="M6 7h15l-1.5 9h-12z"/><path d="M6 7 4 3H2"/><circle cx="9" cy="20" r="1"/><circle cx="17" cy="20" r="1"/></svg>
+        <span class="cart-count">0</span>
+      </a>
+      <button class="burger" aria-label="القائمة"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="menu-overlay">
+    <div class="menu-panel">
+      <a href="index.html"><span>الرئيسية</span></a>
+      <a href="shop.html"><span>المجموعة</span></a>
+      <a href="cart.html"><span>السلة</span></a>
+      <a href="admin.html"><span>لوحة التحكم</span></a>
+      <div class="menu-meta">
+        <span>الجزائر — استيراد حصري</span>
+        <span>info@atlas-maison.dz</span>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="shop-hero">
+      <div class="container" style="padding:0">
+        <div class="breadcrumb"><a href="index.html">الرئيسية</a><span>/</span><span class="gold">المجموعة</span></div>
+        <div class="section-head" style="margin-top:16px">
+          <div>
+            <p class="eyebrow">كل القطع المستوردة</p>
+            <h2 class="section-title" id="shopTitle">المجموعة الكاملة</h2>
+          </div>
+          <p class="section-desc">كل قطعة نستوردها تمر بفحص دقيق للجودة قبل أن تصل إليكِ، احترامًا لثقتك وذوقكِ الرفيع.</p>
+        </div>
+        <div class="shop-toolbar" id="shopChips"></div>
+        <p class="shop-count" id="shopCount"></p>
+      </div>
+    </div>
+
+    <div class="shop-grid" id="shopGrid"></div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="nav-logo">أطلس <b>ATLAS</b></a>
+          <p style="margin-top:18px;color:var(--ink-soft);max-width:280px;font-size:.9rem">دار جزائرية متخصصة في استيراد أرقى الحقائب والإكسسوارات النسائية العالمية.</p>
+        </div>
+        <div>
+          <h5>المتجر</h5>
+          <ul><li><a href="shop.html">المجموعة</a></li><li><a href="cart.html">السلة</a></li><li><a href="index.html#craft">لماذا أطلس</a></li></ul>
+        </div>
+        <div>
+          <h5>الدار</h5>
+          <ul><li><a href="#">من نحن</a></li><li><a href="#">التواصل</a></li><li><a href="admin.html">لوحة التحكم</a></li></ul>
+        </div>
+        <div>
+          <h5>تواصل</h5>
+          <ul><li>info@atlas-maison.dz</li><li>الجزائر العاصمة، الجزائر</li></ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 ATLAS Maison. جميع الحقوق محفوظة.</span>
+        <span>تصميم واجهة أمامية تجريبية — بيانات وهمية بالكامل لأغراض العرض في Portfolio.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    /* ---------- منطق صفحة المتجر: فلترة حسب الصنف + بناء البطاقات ---------- */
+    const params = new URLSearchParams(location.search);
+    let activeCat = params.get("cat") || "الكل";
+
+    const chipsWrap = document.getElementById("shopChips");
+    const grid = document.getElementById("shopGrid");
+    const countEl = document.getElementById("shopCount");
+    const titleEl = document.getElementById("shopTitle");
+
+    function buildChips() {
+      const chips = ["الكل", ...CATEGORIES.map(c => c.name)];
+      chipsWrap.innerHTML = "";
+      chips.forEach(name => {
+        const chip = document.createElement("button");
+        chip.type = "button";
+        chip.className = "shop-chip" + (name === activeCat ? " active" : "");
+        chip.textContent = name;
+        chip.addEventListener("click", () => {
+          activeCat = name;
+          const url = new URL(location.href);
+          if (name === "الكل") url.searchParams.delete("cat"); else url.searchParams.set("cat", name);
+          history.replaceState(null, "", url);
+          render();
+        });
+        chipsWrap.appendChild(chip);
+      });
+    }
+
+    function render() {
+      buildChips();
+      const list = activeCat === "الكل" ? PRODUCTS : PRODUCTS.filter(p => p.category === activeCat);
+      titleEl.textContent = activeCat === "الكل" ? "المجموعة الكاملة" : activeCat;
+      countEl.textContent = `${list.length} قطعة متوفرة`;
+      grid.innerHTML = "";
+
+      if (!list.length) {
+        grid.innerHTML = `<div class="shop-empty">لا توجد قطع في هذا الصنف حاليًا.</div>`;
+        return;
+      }
+
+      list.forEach(p => {
+        const card = document.createElement("a");
+        card.href = `product.html?id=${p.id}`;
+        card.className = "shop-card cursor-view reveal-img";
+        card.dataset.cursor = "استكشف";
+        card.innerHTML = `
+          <div class="sc-media">
+            ${p.badge ? `<span class="sc-badge">${p.badge}</span>` : ""}
+            <img class="sc-primary" src="${p.gallery[0]}" alt="${p.name}" loading="lazy">
+            <img class="sc-secondary" src="${p.gallery[1] || p.gallery[0]}" alt="${p.name}" loading="lazy">
+            <button class="quick-add" data-id="${p.id}" data-name="${p.name}" aria-label="أضيفي إلى السلة" title="أضيفي إلى السلة">
+              <svg viewBox="0 0 24 24"><path d="M6.5 8.5h11l-1 12h-9l-1-12z"/><path d="M9 8.5V6.7a3 3 0 0 1 6 0v1.8"/></svg>
+            </button>
+          </div>
+          <div class="sc-info">
+            <div class="sc-cat">${p.category}</div>
+            <div class="sc-name">${p.name}</div>
+            <div class="sc-price">
+              <span class="now">${p.price.toLocaleString("ar-DZ")} دج</span>
+              ${p.oldPrice ? `<span class="old">${p.oldPrice.toLocaleString("ar-DZ")} دج</span>` : ""}
+            </div>
+          </div>`;
+        grid.appendChild(card);
+      });
+
+      // إعادة تفعيل تأثير كشف الصور (Reveal) على البطاقات المضافة حديثاً، إن وُجدت الدالة
+      if (typeof initImageReveal === "function") initImageReveal();
+      if (typeof ScrollTrigger !== "undefined") ScrollTrigger.refresh();
+    }
+
+    render();
+  </script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عرض المنتج — ATLAS</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="preloader">
+    <div class="pl-word">ATLAS</div>
+    <div class="pl-bar"><span></span></div>
+    <div class="pl-pct">٠٪</div>
+  </div>
+  <div class="grain"></div>
+
+  <nav class="site-nav">
+    <a href="index.html" class="nav-logo">أطلس <b>ATLAS</b></a>
+    <div class="nav-links">
+      <a href="shop.html">المجموعة</a>
+      <a href="index.html#craft">لماذا أطلس</a>
+      <a href="cart.html">السلة</a>
+      <a href="admin.html">لوحة التحكم</a>
+    </div>
+    <div class="nav-actions">
+      <a href="cart.html" class="icon-btn cursor-hover" aria-label="السلة">
+        <svg viewBox="0 0 24 24"><path d="M6 7h15l-1.5 9h-12z"/><path d="M6 7 4 3H2"/><circle cx="9" cy="20" r="1"/><circle cx="17" cy="20" r="1"/></svg>
+        <span class="cart-count">0</span>
+      </a>
+      <button class="burger" aria-label="القائمة"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="menu-overlay">
+    <div class="menu-panel">
+      <a href="index.html"><span>الرئيسية</span></a>
+      <a href="shop.html"><span>المجموعة</span></a>
+      <a href="cart.html"><span>السلة</span></a>
+      <a href="admin.html"><span>لوحة التحكم</span></a>
+    </div>
+  </div>
+
+  <main class="product-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">الرئيسية</a><span>/</span><a href="shop.html">المجموعة</a><span>/</span><span class="gold" id="crumbName">المنتج</span></div>
+
+      <div class="product-layout">
+        <!-- المعرض -->
+        <div class="gallery">
+          <div class="gallery-main cursor-view" data-cursor="انظر">
+            <div class="layer layer-blur" id="galleryBlur"></div>
+            <div class="layer layer-sharp" id="gallerySharp"></div>
+          </div>
+          <div class="gallery-thumbs" id="galleryThumbs"></div>
+        </div>
+
+        <!-- المعلومات + النموذج -->
+        <div class="product-info">
+          <p class="eyebrow" id="pCategory">الفئة</p>
+          <h1 id="pName">اسم المنتج</h1>
+          <div class="product-price">
+            <span class="now" id="pPriceNow">0 دج</span>
+            <span class="old" id="pPriceOld">0 دج</span>
+          </div>
+          <p class="product-desc" id="pDesc"></p>
+
+          <div class="product-meta">
+            <div><span class="k">الخامة</span><span class="v" id="pMaterial">—</span></div>
+            <div><span class="k">اللون</span><span class="v" id="pColor">—</span></div>
+          </div>
+
+          <div class="qty-row">
+            <div class="qty-box">
+              <button type="button" id="qtyMinus" aria-label="إنقاص">−</button>
+              <span id="qtyDisplay">1</span>
+              <button type="button" id="qtyPlus" aria-label="زيادة">+</button>
+            </div>
+            <button type="button" id="addToCartBtn" class="btn btn-gold magnetic">أضف إلى السلة</button>
+          </div>
+
+          <!-- نموذج الطلب -->
+          <div class="order-form">
+            <h3>اطلب الآن — توصيل إلى كل الولايات</h3>
+            <form id="orderForm" novalidate>
+              <div class="form-grid">
+                <div class="field full">
+                  <label for="fullName">الاسم الكامل</label>
+                  <input type="text" id="fullName" placeholder="مثال: ياسين بلقاسمي">
+                  <span class="err-msg"></span>
+                </div>
+                <div class="field full">
+                  <label for="phone">رقم الهاتف</label>
+                  <input type="tel" id="phone" placeholder="0555 12 34 56">
+                  <span class="err-msg"></span>
+                </div>
+                <div class="field">
+                  <label for="wilayaSelect">الولاية</label>
+                  <select id="wilayaSelect"></select>
+                  <span class="err-msg"></span>
+                </div>
+                <div class="field">
+                  <label for="communeSelect">البلدية</label>
+                  <select id="communeSelect" disabled><option value="">اختر الولاية أولًا</option></select>
+                  <span class="err-msg"></span>
+                </div>
+                <div class="field full">
+                  <label>نوع التوصيل</label>
+                  <div style="display:flex;gap:24px;margin-top:6px">
+                    <label style="display:flex;align-items:center;gap:8px;font-size:.9rem;color:var(--ink-soft)">
+                      <input type="radio" name="deliveryType" value="home" checked> إلى المنزل
+                    </label>
+                    <label style="display:flex;align-items:center;gap:8px;font-size:.9rem;color:var(--ink-soft)">
+                      <input type="radio" name="deliveryType" value="desk"> إلى المكتب
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ملخص الطلب الحي -->
+              <div class="order-summary">
+                <div class="os-row"><span id="osProductName">—</span><span></span></div>
+                <div class="os-row"><span>الكمية</span><span id="osQty" class="amt">1</span></div>
+                <div class="os-row"><span>المجموع الجزئي</span><span id="osSubtotal" class="amt">0 دج</span></div>
+                <div class="os-row"><span>سعر التوصيل</span><span id="osDelivery" class="amt">—</span></div>
+                <div class="os-row total"><span>المجموع الكلي</span><span id="osTotal" class="amt">0 دج</span></div>
+              </div>
+
+              <button type="submit" class="btn btn-gold magnetic" style="margin-top:26px;width:100%;justify-content:center">تأكيد الطلب</button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer style="margin-top:100px">
+    <div class="container footer-bottom">
+      <span>© 2026 ATLAS Maison.</span>
+      <span>واجهة أمامية تجريبية — بيانات وهمية بالكامل.</span>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/product.js"></script>
+</body>
+</html>

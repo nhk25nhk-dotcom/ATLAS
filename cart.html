@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>السلة — ATLAS</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="preloader">
+    <div class="pl-word">ATLAS</div>
+    <div class="pl-bar"><span></span></div>
+    <div class="pl-pct">٠٪</div>
+  </div>
+  <div class="grain"></div>
+
+  <nav class="site-nav">
+    <a href="index.html" class="nav-logo">أطلس <b>ATLAS</b></a>
+    <div class="nav-links">
+      <a href="shop.html">المجموعة</a>
+      <a href="index.html#craft">لماذا أطلس</a>
+      <a href="cart.html">السلة</a>
+      <a href="admin.html">لوحة التحكم</a>
+    </div>
+    <div class="nav-actions">
+      <a href="cart.html" class="icon-btn cursor-hover" aria-label="السلة">
+        <svg viewBox="0 0 24 24"><path d="M6 7h15l-1.5 9h-12z"/><path d="M6 7 4 3H2"/><circle cx="9" cy="20" r="1"/><circle cx="17" cy="20" r="1"/></svg>
+        <span class="cart-count">0</span>
+      </a>
+      <button class="burger" aria-label="القائمة"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="menu-overlay">
+    <div class="menu-panel">
+      <a href="index.html"><span>الرئيسية</span></a>
+      <a href="shop.html"><span>المجموعة</span></a>
+      <a href="cart.html"><span>السلة</span></a>
+      <a href="admin.html"><span>لوحة التحكم</span></a>
+    </div>
+  </div>
+
+  <main class="cart-shell">
+    <div>
+      <p class="eyebrow">سلتك</p>
+      <h1 style="font-size:clamp(1.8rem,3.5vw,2.6rem);margin-top:14px">مراجعة القطع المختارة</h1>
+
+      <div id="cartList" style="margin-top:40px"></div>
+
+      <div id="cartEmpty" class="cart-empty" style="display:none">
+        <p class="eyebrow" style="justify-content:center">السلة فارغة</p>
+        <h3>لم تختر قطعتك بعد</h3>
+        <p style="color:var(--ink-soft);margin-top:10px">تصفح مجموعتنا الحالية واختر ما يناسبك.</p>
+        <a href="shop.html" class="btn btn-gold magnetic" style="margin-top:26px">تصفح المجموعة</a>
+      </div>
+
+      <!-- نموذج إتمام الشراء — يظهر عند الضغط على "إتمام الشراء" -->
+      <div id="checkoutSection" class="order-form" style="display:none">
+        <h3>إتمام الطلب</h3>
+        <form id="checkoutForm" novalidate>
+          <div class="form-grid">
+            <div class="field full">
+              <label for="coFullName">الاسم الكامل</label>
+              <input type="text" id="coFullName" placeholder="مثال: ياسين بلقاسمي">
+              <span class="err-msg"></span>
+            </div>
+            <div class="field full">
+              <label for="coPhone">رقم الهاتف</label>
+              <input type="tel" id="coPhone" placeholder="0555 12 34 56">
+              <span class="err-msg"></span>
+            </div>
+            <div class="field">
+              <label for="coWilaya">الولاية</label>
+              <select id="coWilaya"></select>
+              <span class="err-msg"></span>
+            </div>
+            <div class="field">
+              <label for="coCommune">البلدية</label>
+              <select id="coCommune" disabled><option value="">اختر الولاية أولًا</option></select>
+              <span class="err-msg"></span>
+            </div>
+            <div class="field full">
+              <label>نوع التوصيل</label>
+              <div style="display:flex;gap:24px;margin-top:6px">
+                <label style="display:flex;align-items:center;gap:8px;font-size:.9rem;color:var(--ink-soft)">
+                  <input type="radio" name="coDeliveryType" value="home" checked> إلى المنزل
+                </label>
+                <label style="display:flex;align-items:center;gap:8px;font-size:.9rem;color:var(--ink-soft)">
+                  <input type="radio" name="coDeliveryType" value="desk"> إلى المكتب
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="order-summary">
+            <div class="os-row"><span>المجموع الجزئي</span><span id="coSubtotal" class="amt">0 دج</span></div>
+            <div class="os-row"><span>سعر التوصيل</span><span id="coDelivery" class="amt">—</span></div>
+            <div class="os-row total"><span>المجموع الكلي</span><span id="coTotal" class="amt">0 دج</span></div>
+          </div>
+
+          <button type="submit" class="btn btn-gold magnetic" style="margin-top:26px;width:100%;justify-content:center">تأكيد الطلب</button>
+        </form>
+      </div>
+    </div>
+
+    <aside id="cartSummaryBox" class="cart-summary">
+      <h3 style="font-size:1.2rem">ملخص الطلب</h3>
+      <div class="os-row"><span>المجموع الجزئي</span><span id="cartSubtotal" class="amt">0 دج</span></div>
+      <div class="os-row"><span>التوصيل</span><span class="amt">يُحدد عند إتمام الشراء</span></div>
+      <div class="os-row total"><span>المجموع الكلي</span><span id="cartTotal" class="amt">0 دج</span></div>
+
+      <div class="promo-row">
+        <input type="text" placeholder="كود الخصم">
+        <button id="promoBtn" class="btn" style="padding:12px 20px">تطبيق</button>
+      </div>
+
+      <button id="checkoutBtn" class="btn btn-gold magnetic" style="width:100%;justify-content:center;margin-top:26px">إتمام الشراء</button>
+    </aside>
+  </main>
+
+  <footer>
+    <div class="container footer-bottom">
+      <span>© 2026 ATLAS Maison.</span>
+      <span>واجهة أمامية تجريبية — بيانات وهمية بالكامل.</span>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+</html>
